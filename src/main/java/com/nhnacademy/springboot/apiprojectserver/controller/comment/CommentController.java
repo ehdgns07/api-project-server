@@ -35,8 +35,6 @@ public class CommentController {
 
     @DeleteMapping
     public String eraseComment(@RequestBody DeleteCommentDto deleteCommentDto){
-
         return commentService.removeComment(deleteCommentDto);
-
     }
 }
