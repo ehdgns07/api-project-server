@@ -1,0 +1,10 @@
+
+POST /newMember
+Content-Type: application/json
+Host: localhost:8082
+
+{
+  "projectId": 2,
+  "adminId": 1,
+  "newMemberId": 2
+}

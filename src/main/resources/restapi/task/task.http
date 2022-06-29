@@ -1,0 +1,47 @@
+GET /tasks/page/1?page=0&size=5
+Content-Type: application/json
+Host: localhost:8082
+
+###
+
+GET /tasks/1
+Content-Type: application/json
+Host: localhost:8082
+
+###
+
+POST /tasks
+Content-Type: application/json
+Host: localhost:8082
+
+{
+  "taskName": "eighth task",
+  "taskContent": "eighth task is very hard too",
+  "projectId": 2,
+  "memberId": 1
+}
+
+###
+
+PUT /tasks
+Content-Type: application/json
+Host: localhost:8082
+
+{
+  "projectId": 2,
+  "memberId": 1,
+  "taskId": 11,
+  "taskContent": "task is easy...?"
+}
+
+###
+
+DELETE /tasks/13
+Content-Type: application/json
+Host: localhost:8082
+
+{
+  "projectId": 1,
+  "memberId": 1,
+  "taskName": "seventh task"
+}

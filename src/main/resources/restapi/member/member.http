@@ -1,0 +1,9 @@
+POST /members
+Content-Type: application/json
+Host: localhost:8082
+
+{
+  "memberId": 5,
+  "username": "lee",
+  "email": "em@email.com"
+}

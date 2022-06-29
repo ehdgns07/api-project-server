@@ -1,0 +1,33 @@
+POST /tags
+Content-Type: application/json
+Host: localhost:8082
+
+{
+  "tagName": "mvc",
+  "projectId": 2
+}
+
+###
+
+PUT /tags/1
+Content-Type: application/json
+Host: localhost:8082
+
+{
+  "tagName": "spring-boot"
+}
+
+###
+DELETE /tags/3
+Host: localhost:8082
+
+###
+
+POST /tags/addTag
+Content-Type: application/json
+Host: localhost:8082
+
+{
+  "pkTaskId": 1,
+  "tagId": 1
+}

@@ -1,0 +1,37 @@
+POST /milestones
+Content-Type: application/json
+Host: localhost:8082
+
+{
+  "milestoneName": "member apiserver develop",
+  "expectedBeginDt": "2022-06-11",
+  "expectedCompleteDt": "2022-06-11",
+  "projectId": 2
+}
+
+###
+PUT /milestones/3
+Content-Type: application/json
+Host: localhost:8082
+
+{
+  "milestoneName": "api server develop",
+  "expectedBeginDt": "2022-06-12",
+  "expectedCompleteDt": "2022-06-12"
+}
+
+###
+
+DELETE /milestones/3
+Host: localhost:8082
+
+###
+
+POST /milestones/addMilestone
+Content-Type: application/json
+Host: localhost:8082
+
+{
+  "pkTaskId": 3,
+  "milestoneId": 4
+}

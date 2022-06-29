@@ -1,0 +1,32 @@
+POST /comments
+Content-Type: application/json
+Host: localhost:8082
+
+{
+  "commentContent": "조심할게요",
+  "memberId": 2,
+  "pkTaskId": 1
+}
+
+###
+
+PUT /comments
+Content-Type: application/json
+Host: localhost:8082
+
+{
+  "commentId": 8,
+  "commentContent": "다시할래요?",
+  "memberId": 2
+}
+
+###
+
+DELETE /comments
+Content-Type: application/json
+Host: localhost:8082
+
+{
+  "commentId": 8,
+  "memberId": 2
+}
