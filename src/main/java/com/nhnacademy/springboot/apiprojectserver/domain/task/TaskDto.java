@@ -12,9 +12,9 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class TaskDto {
 
-    private Long pkTaskId;
+    private Long taskId;
 
-    private String pkTaskName;
+    private String taskName;
 
     private String taskContent;
 

@@ -16,7 +16,6 @@ import java.util.Objects;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -35,8 +34,8 @@ public class TaskServiceImpl implements TaskService {
 
         return taskRepository.findAllByProjectMemberIdProjectId(pageable, projectId).map(
             task -> TaskDto.builder()
-                .pkTaskId(task.getPk().getTaskId())
-                .pkTaskName(task.getPk().getTaskName())
+                .taskId(task.getTaskId())
+                .taskName(task.getTaskName())
                 .taskCreatedDt(task.getTaskCreatedDt())
                 .build());
     }
@@ -55,17 +54,11 @@ public class TaskServiceImpl implements TaskService {
         ProjectMember.Id id =
             new ProjectMember.Id(newTaskRequest.getMemberId(), newTaskRequest.getProjectId());
 
-        Task.Pk taskPk = new Task.Pk();
-
-        taskPk.setTaskName(newTaskRequest.getTaskName());
-
-
         Task task = Task.builder()
+            .taskName(newTaskRequest.getTaskName())
             .taskContent(newTaskRequest.getTaskContent())
             .taskCreatedDt(LocalDateTime.now())
             .build();
-
-        task.setPk(taskPk);
 
         ProjectMember projectMember = projectMemberRepository.findById(id).orElse(null);
 
@@ -75,14 +68,13 @@ public class TaskServiceImpl implements TaskService {
         }
         Long taskCount = taskRepository.count();
 
-        task.getPk().setTaskId(taskCount + 1);
-
         return modelMapper.map(taskRepository.save(task), NewTaskDto.class);
 
     }
 
 
     @Override
+    @Transactional
     public TaskDto modifyTask(EditTaskRequest editTaskRequest) {
 
         ProjectMember.Id id = new ProjectMember.Id(editTaskRequest.getMemberId(),
@@ -106,14 +98,12 @@ public class TaskServiceImpl implements TaskService {
         ProjectMember.Id id = new ProjectMember.Id(deleteRequest.getMemberId(),
             deleteRequest.getProjectId());
 
-        Task.Pk pk = new Task.Pk(taskId,deleteRequest.getTaskName());
-
         if (isMemberOfProject(deleteRequest.getMemberId(), id)) {
-            if (Objects.isNull(taskRepository.findByPk(pk))) {
+            if (Objects.isNull(taskRepository.findById(taskId))) {
                 return false;
             }
 
-            taskRepository.deleteByPk(pk);
+            taskRepository.deleteById(taskId);
 
             return true;
         }

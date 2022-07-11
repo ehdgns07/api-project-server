@@ -6,19 +6,8 @@ import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Embeddable;
-import javax.persistence.EmbeddedId;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinColumns;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -32,8 +21,14 @@ import lombok.NoArgsConstructor;
 @Table(name = "task")
 public class Task {
 
-    @EmbeddedId
-   private Pk pk;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "task_id")
+    private Long taskId;
+
+    @Column(name = "task_name")
+    private String taskName;
+
 
     @Column(name = "task_content")
     private String taskContent;
@@ -73,17 +68,4 @@ public class Task {
         comments.add(comment);
     }
 
-    @Embeddable
-    @Data
-    @AllArgsConstructor
-    @NoArgsConstructor
-    public static class Pk implements Serializable {
-
-        @Column(name = "task_id")
-        private Long taskId;
-
-        @Column(name = "task_name")
-        private String taskName;
-
-    }
 }
