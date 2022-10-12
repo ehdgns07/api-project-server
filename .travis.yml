@@ -21,7 +21,7 @@
 
   # main 브랜치에 push 되면 수행되는 명령어이다.
   # 프로젝트 내에 권한이 추가된 gradlew를 활용하여 clean, build를 진행한다.
-  script: "./mvnw clean build"
+  script: "./mvnw clean package"
 
 
   notifications:
